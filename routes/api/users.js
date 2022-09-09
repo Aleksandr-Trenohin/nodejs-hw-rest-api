@@ -4,33 +4,35 @@ const ctrl = require("../../controllers/users");
 
 const { ctrlWrapper } = require("../../helpers");
 
-const { validationBody, authenticate } = require("../../middlewares");
+const { validationBody, authenticate, upload } = require("../../middlewares");
 
 const { schemas } = require("../../models/user");
 
 const router = express.Router();
 
-// (or register)
 router.post(
   "/signup",
   validationBody(schemas.signupSchema),
   ctrlWrapper(ctrl.signup)
 );
 
-// (or signin)
 router.post(
   "/login",
   validationBody(schemas.loginSchema),
   ctrlWrapper(ctrl.login)
 );
 
-// logout
+router.patch(
+  "/avatars",
+  authenticate,
+  upload.single("avatar"),
+  ctrlWrapper(ctrl.updateAvatar)
+);
+
 router.get("/logout", authenticate, ctrlWrapper(ctrl.logout));
 
-// current
 router.get("/current", authenticate, ctrlWrapper(ctrl.current));
 
-// subscription
 router.patch(
   "/:userId",
   authenticate,
