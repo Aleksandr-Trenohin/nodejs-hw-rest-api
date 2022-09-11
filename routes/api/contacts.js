@@ -4,7 +4,6 @@ const ctrl = require("../../controllers/contacts");
 
 const { ctrlWrapper } = require("../../helpers");
 
-
 const {
   authenticate,
   validationBody,
