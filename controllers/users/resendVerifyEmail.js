@@ -14,7 +14,7 @@ const resendVerifyEmail = async (req, res) => {
   const mail = {
     to: email,
     subject: "Please verify your email address",
-    html: `<a href="http://localhost:3000/api/users/verify/${user.verificationToken}" target="_blank">Verify email address</a>`,
+    html: `<a href="http://phonebook-rest-api-a.herokuapp.com/api/users/verify/${user.verificationToken}" target="_blank">Verify email address</a>`,
   };
   await sendEmail(mail);
   res.json({
